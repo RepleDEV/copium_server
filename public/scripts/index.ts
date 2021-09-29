@@ -1,3 +1,6 @@
+// I DONT WANT TO USE WEBPACK. IT'S A PITA
+declare function io(...args: any[]): any;
+
 function printToConsole(message: string) {
     const $consoleElement = $("#console_output");
 
@@ -37,7 +40,7 @@ $(async() => {
         log(`Disconnected from host server`);
     });
 
-    socket.on("connect_error", (err) => {
+    socket.on("connect_error", (err: any) => {
         log(`Connection error: ${err}`);
     });
 
@@ -70,7 +73,7 @@ $(async() => {
                 if (args.length > 1) {
                     const auth = args[1];
 
-                    socket.once("auth_response", (response) => {
+                    socket.once("auth_response", (response: boolean) => {
                         authenticated = response;
                         log("Authentication response: " + response);
                     });
@@ -87,7 +90,7 @@ $(async() => {
         }
     });
 
-    socket.on("log", (msg) => {
+    socket.on("log", (msg: string) => {
         log("Server: " + msg);
     });
 });
